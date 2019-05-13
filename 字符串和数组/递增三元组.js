@@ -16,6 +16,31 @@
  */
 
 /**
+ * 动态规划，
+ * b代表一元组，碰上小的直接换
+ * a代表二元组最后一位，一元组碰上大的与a比较。比a小换a
+ * 碰上比a大的返回 true 否则 false 
+ */
+
+
+/**
  * @param {number[]} nums
  * @return {boolean}
  */
+var increasingTriplet = function (nums) {
+    if (nums.length < 3) return false
+    let a = null
+    var b = nums[0]
+    for (let i = 1; i < nums.length; i++) {
+        let tmp = nums[i]
+        if (tmp > a && a !== null) {
+            return true
+        }
+        if (nums[i] <= b) {
+            b = nums[i]
+        } else if (tmp < a || a === null) {
+            a = tmp
+        }
+    }
+    return false
+}
